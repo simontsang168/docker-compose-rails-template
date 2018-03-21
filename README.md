@@ -30,12 +30,12 @@ Now add any other gem you think you need. then run `docker-compose up` (and new 
 To avoid warnings about blocked ip's in your server log and get the Rails web console working again, In your config/environments/development.rb, add the following line:
 
 ```
-def first_private_ipv4
-  addrinfo = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}
-  addrinfo.try :ip_address
+def whitelisted_ip
+  addrinfo = Socket.ip_address_list.detect(&:ipv4_private?)
+  addrinfo.try(:ip_address).sub(/\.(\d{1,3})$/, '.0/16')
 end
 
-config.web_console.whitelisted_ips = first_private_ipv4.sub(/\.(\d{1,3})$/, ".0/16")
+config.web_console.whitelisted_ips = whitelisted_ip
 ```
 
 ## LICENSE
