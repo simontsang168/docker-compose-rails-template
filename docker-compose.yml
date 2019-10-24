@@ -1,11 +1,17 @@
-version: '2'
+version: '3.7'
 services:
   db:
-    image: mongo:3.6
-    command: mongod --smallfiles --bind_ip_all
-    ports:
-      - "127.0.0.1:27017:27017"
-  app:
+    image: postgres
+      restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
+  api:
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -18,6 +24,6 @@ services:
     links:
       - db
     stdin_open: true
-    tty: true      
+    tty: true
 volumes:
   bundler: {}
