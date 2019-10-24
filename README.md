@@ -2,7 +2,7 @@
 
 ##### Requires Docker Compose v1.6+ for [older supported versions look at this branch](https://github.com/madwire/docker-compose-rails-template/tree/docker-compose-yml-version-1)
 
-Simple change [my_app_name] to your app name!
+Simple change my_app_name to your app name!
 
 ```
 mkdir my_app_name && cd my_app_name
