@@ -2,15 +2,14 @@ version: '3.7'
 services:
   db:
     image: postgres
-      restart: always
     environment:
       POSTGRES_PASSWORD: example
 
-    adminer:
-      image: adminer
-      restart: always
-      ports:
-        - 8080:8080
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
   api:
     build:
       context: .
