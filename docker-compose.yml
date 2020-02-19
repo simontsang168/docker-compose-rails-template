@@ -1,4 +1,4 @@
-version: '2'
+version: '3.7'
 services:
   db:
     image: mongo:3.6
@@ -10,14 +10,14 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     command: ./script/start
-    volumes:
-      - .:/workspace
-      - bundler:/bundler
     ports:
       - "3000:3000"
     links:
       - db
     stdin_open: true
-    tty: true      
+    tty: true  
+    volumes:
+      - .:/workspace
+      - bundler:/bundler        
 volumes:
   bundler: {}

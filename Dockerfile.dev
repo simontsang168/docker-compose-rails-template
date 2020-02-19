@@ -1,4 +1,4 @@
-FROM ruby:2.3
+FROM ruby:2.6
 ENV BUNDLE_PATH /bundler
 
 RUN apt-get update -qq && apt-get install -y build-essential
@@ -6,9 +6,6 @@ RUN apt-get update -qq && apt-get install -y build-essential
 RUN mkdir /workspace
 WORKDIR /workspace
 
-ADD Gemfile /workspace/Gemfile
-ADD Gemfile.lock /workspace/Gemfile.lock
-ADD script /workspace/script
+ADD . /workspace
 
 RUN bundle install --jobs 4
-ADD . /workspace

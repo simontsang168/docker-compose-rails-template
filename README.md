@@ -1,27 +1,29 @@
 # Docker Compose - Rails new template
 
-##### Requires Docker Compose v1.6+ for [older supported versions look at this branch](https://github.com/madwire/docker-compose-rails-template/tree/docker-compose-yml-version-1)
-
 Simple change my_app_name to well your app name!
 
-```
-mkdir my_app_name && cd my_app_name
-git clone https://github.com/thinkidea/docker-compose-rails-template . && rm -rf .git && rm README.md
-docker-compose run --no-deps --rm app script/new && rm script/new
+```bash
+git clone https://github.com/thinkidea/docker-compose-rails-template my_app_name && cd my_app_name && rm -rf .git && rm README.md
+docker-compose run --no-deps --rm app bundle exec rails new . --force --skip-bundle --skip-active-record
 ```
 
-### Change the app name in:
+### Change the app name in
 
 - config/application.rb
-- config/initializers/session_store.rb (optional)
 
-### Then
+### Add Mongoid
 
-Uncomment the line in your new Gemfile which loads therubyracer, so we've got a Javascript runtime:
+Add the following to **Gemfile**
 
-`gem 'therubyracer', platforms: :ruby`
+```ruby
+gem 'mongoid'
+```
 
-Now add any other gem you think you need. then run `docker-compose up` (and new gems will automatically be installed)
+```bash
+docker-compose run --no-deps --rm app bundle install && bundle exec rails g mongoid:config
+```
+
+then run `docker-compose up` (and new gems will automatically be installed)
 
 ### Also
 
@@ -29,7 +31,7 @@ Now add any other gem you think you need. then run `docker-compose up` (and new 
 
 To avoid warnings about blocked ip's in your server log and get the Rails web console working again, In your config/environments/development.rb, add the following line:
 
-```
+```ruby
 def whitelisted_ip
   addrinfo = Socket.ip_address_list.detect(&:ipv4_private?)
   addrinfo.try(:ip_address).sub(/\.(\d{1,3})$/, '.0/16')
@@ -42,7 +44,7 @@ config.web_console.whitelisted_ips = whitelisted_ip
 
 The MIT License (MIT)
 
-Copyright (c) 2016 Richard Adams
+Copyright (c) 2020 Thinkidea Ltd
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
