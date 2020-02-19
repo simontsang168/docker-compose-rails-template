@@ -4,7 +4,12 @@ Simple change my_app_name to well your app name!
 
 ```bash
 git clone https://github.com/thinkidea/docker-compose-rails-template my_app_name && cd my_app_name && rm -rf .git && rm README.md
-docker-compose run --no-deps --rm app bundle exec rails new . --force --skip-bundle --skip-active-record
+
+# Run new container
+docker-compose run --no-deps --rm app bash
+bundle exec rails new --help
+# or
+docker-compose run --no-deps --rm app bundle exec rails new . --force --skip-active-record --skip-bundle --skip-webpack-install
 ```
 
 ### Change the app name in
@@ -23,7 +28,16 @@ gem 'mongoid'
 docker-compose run --no-deps --rm app bundle install && bundle exec rails g mongoid:config
 ```
 
-then run `docker-compose up` (and new gems will automatically be installed)
+Update `config/mongoid.yml`with new database name and replace :
+
+```yaml
+localhost:27017
+
+# with
+db:27017
+```
+
+`docker-compose up` to start the the services listed in docker-compose.yml (and new gems will automatically be installed)
 
 ### Also
 
