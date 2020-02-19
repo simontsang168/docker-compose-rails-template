@@ -9,18 +9,19 @@ git clone https://github.com/thinkidea/docker-compose-rails-template my_app_name
 docker-compose run --no-deps --rm app bash
 bundle exec rails new --help
 # or
-bundle exec rails new . --force--skip-bundle --skip-webpack-install
+bundle exec rails new . --force --skip-bundle --skip-webpack-install
 ```
 
 ### Change the app name in
 
 - config/application.rb
 
-### Add Mongoid
+### Update Gemfile
 
 Add the following to **Gemfile**
 
 ```ruby
+# remove webpacker gem
 gem 'mongoid'
 ```
 
