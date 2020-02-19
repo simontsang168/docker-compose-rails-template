@@ -9,7 +9,7 @@ git clone https://github.com/thinkidea/docker-compose-rails-template my_app_name
 docker-compose run --no-deps --rm app bash
 bundle exec rails new --help
 # or
-docker-compose run --no-deps --rm app bundle exec rails new . --force --skip-active-record --skip-bundle --skip-webpack-install
+bundle exec rails new . --force--skip-bundle --skip-webpack-install
 ```
 
 ### Change the app name in
@@ -25,7 +25,8 @@ gem 'mongoid'
 ```
 
 ```bash
-docker-compose run --no-deps --rm app bundle install && bundle exec rails g mongoid:config
+docker-compose run --no-deps --rm app bash
+bundle install && bundle exec rails g mongoid:config
 ```
 
 Update `config/mongoid.yml`with new database name and replace :
